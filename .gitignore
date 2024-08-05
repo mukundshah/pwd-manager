@@ -1,0 +1,25 @@
+# Python
+.venv
+*.sqlite3
+__pycache__
+
+# React
+build
+dist
+
+# Node dependencies
+node_modules
+
+# Logs
+logs
+*.log
+
+# Misc
+.DS_Store
+.fleet
+.idea
+
+# Local env files
+.env
+.env.*
+!.env.example
