@@ -2,6 +2,8 @@ import process from 'node:process'
 import CryptoJS from 'crypto-js'
 import { APIService } from './api.service'
 
+import type { TGeneratePasswordSchema } from '@/validators/generate-password-schema'
+
 interface Password {
   id: number
   title: string
@@ -28,6 +30,49 @@ export class PasswordService extends APIService {
   private decrypt(ciphertext: string): string {
     const bytes = CryptoJS.AES.decrypt(ciphertext, this.encryptionKey)
     return bytes.toString(CryptoJS.enc.Utf8)
+  }
+
+  async generatePassword(data: TGeneratePasswordSchema): Promise<string> {
+    const lowercaseChars = 'abcdefghijklmnopqrstuvwxyz'
+    const uppercaseChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+    const digitsChars = '0123456789'
+    const specialChars = '!@#$%^&*()-_=+[]{}|;:,.<>?'
+
+    const { length, lowercase, uppercase, digits, specialCharacters } = data
+
+    const availableChars = []
+    if (lowercase) availableChars.push(...lowercaseChars)
+    if (uppercase) availableChars.push(...uppercaseChars)
+    if (digits) availableChars.push(...digitsChars)
+    if (specialCharacters) availableChars.push(...specialChars)
+
+    if (availableChars.length === 0) {
+      throw new Error('At least one character type must be selected')
+    }
+
+    // Ensure we have at least one of each selected type
+    const requiredChars = []
+    if (lowercase) requiredChars.push(lowercaseChars[Math.floor(Math.random() * lowercaseChars.length)])
+    if (uppercase) requiredChars.push(uppercaseChars[Math.floor(Math.random() * uppercaseChars.length)])
+    if (digits) requiredChars.push(digitsChars[Math.floor(Math.random() * digitsChars.length)])
+    if (specialCharacters) requiredChars.push(specialChars[Math.floor(Math.random() * specialChars.length)])
+
+    // Fill the remaining length of the password
+    const remainingLength = length - requiredChars.length
+    const password = [...requiredChars]
+
+    for (let i = 0; i < remainingLength; i++) {
+      const randomIndex = Math.floor(Math.random() * availableChars.length)
+      password.push(availableChars[randomIndex])
+    }
+
+    // Shuffle the password array
+    for (let i = password.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1))
+      ;[password[i], password[j]] = [password[j], password[i]]
+    }
+
+    return password.join('')
   }
 
   async getAllPasswords(): Promise<Password[]> {
