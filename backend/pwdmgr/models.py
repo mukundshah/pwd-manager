@@ -13,6 +13,7 @@ class Category(models.Model):
 
 class Password(models.Model):
     website_name = models.CharField(max_length=255)
+    favicon = models.ImageField(upload_to="favicons", blank=True, null=True)
     email = models.EmailField(blank=True, null=True)
     username = models.CharField(max_length=255, blank=True, null=True)
     password = models.CharField(max_length=255)
