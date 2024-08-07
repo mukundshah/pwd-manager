@@ -10,7 +10,7 @@ export abstract class APIService {
   public readonly api: $Fetch
 
   constructor({ baseURL, auth }: { baseURL?: string, auth?: boolean } = {}) {
-    this.baseURL = baseURL || process.env.REACT_APP_API_BASE_URL || '/'
+    this.baseURL = baseURL || import.meta.env.REACT_APP_API_BASE_URL || '/'
 
     this.api = ofetch.create({
       baseURL: this.baseURL,

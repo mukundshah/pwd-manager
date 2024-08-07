@@ -1,9 +1,6 @@
 import { APIService } from './api.service'
 
-interface Category {
-  id: number
-  name: string
-}
+import type { Category } from '@/types'
 
 export class CategoryService extends APIService {
   constructor() {

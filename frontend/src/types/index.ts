@@ -1,3 +1,10 @@
+export interface User {
+  id: number
+  email: string
+  username: string
+  avatar: string
+}
+
 export interface Category {
   id: string
   name: string
@@ -12,5 +19,5 @@ export interface Password {
   password: string
   favicon?: string
   url: string
-  category: Category
+  category: Category | number
 }
