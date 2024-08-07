@@ -14,6 +14,10 @@ export class AuthService extends APIService {
     })
   }
 
+  static get loggedIn(): boolean {
+    return !!Cookies.get('token')
+  }
+
   async register(body: { email: string, password: string }): Promise<any> {
     return this.api('/web/admin_users', {
       method: 'POST',

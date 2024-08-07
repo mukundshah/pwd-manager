@@ -1,4 +1,3 @@
-import process from 'node:process'
 import CryptoJS from 'crypto-js'
 import { APIService } from './api.service'
 

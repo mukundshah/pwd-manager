@@ -2,16 +2,10 @@ import React from 'react'
 import { Link, Navigate } from 'react-router-dom'
 
 import SignInForm from '@/components/forms/signin-form'
-import { useCurrentUser } from '@/hooks/use-current-user'
+import { AuthService } from '@/services/auth.service'
 
 const SignInPage: React.FC = () => {
-  const { data: currentUser, isLoading } = useCurrentUser()
-
-  if (isLoading) {
-    return <div>Loading...</div>
-  }
-
-  if (currentUser) {
+  if (AuthService.loggedIn) {
     return <Navigate to="/dashboard" replace />
   }
 

@@ -1,5 +1,3 @@
-import process from 'node:process'
-
 import Cookies from 'js-cookie'
 import { ofetch } from 'ofetch'
 

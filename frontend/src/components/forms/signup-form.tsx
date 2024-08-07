@@ -20,7 +20,7 @@ import {
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { Checkbox } from '@/components/ui/checkbox'
-import { AuthService } from '@/services/auth.service' // You'll need to create this
+import { AuthService } from '@/services/auth.service'
 
 const authService = new AuthService()
 

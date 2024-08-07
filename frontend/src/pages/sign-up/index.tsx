@@ -1,15 +1,9 @@
 import { Link, Navigate } from 'react-router-dom'
-import { useCurrentUser } from '@/hooks/use-current-user'
 import SignUpForm from '@/components/forms/signup-form'
+import { AuthService } from '@/services/auth.service'
 
 const SignUpPage = () => {
-  const { data: currentUser, isLoading } = useCurrentUser()
-
-  if (isLoading) {
-    return <div>Loading...</div> // Or a more sophisticated loading component
-  }
-
-  if (currentUser) {
+  if (AuthService.loggedIn) {
     return <Navigate to="/dashboard" replace />
   }
 
@@ -25,9 +19,8 @@ const SignUpPage = () => {
       <div className="min-w-[420px] space-y-5">
         <div className="space-y-1.5 text-center">
           <h1 className="text-3xl font-light">
-            Next/
             <Link to="/" className="font-bold">
-              Passw*ird
+              PWD Manager
             </Link>
           </h1>
           <p className="text-sm text-zinc-500 [text-wrap:balance]">
