@@ -27,5 +27,10 @@ class Password(models.Model):
         on_delete=models.CASCADE,
     )
 
+    def clean(self):
+        if not self.email and not self.username:
+            raise ValueError("Either email or username is required")
+        return super().clean()
+
     def __str__(self):
         return self.website_name
