@@ -3,16 +3,7 @@ import CryptoJS from 'crypto-js'
 import { APIService } from './api.service'
 
 import type { TGeneratePasswordSchema } from '@/validators/generate-password-schema'
-
-interface Password {
-  id: number
-  title: string
-  username: string
-  password: string
-  url: string
-  notes: string
-  category: number
-}
+import type { Password } from '@/types'
 
 export class PasswordService extends APIService {
   private encryptionKey: string
@@ -91,7 +82,7 @@ export class PasswordService extends APIService {
     }
   }
 
-  async createPassword(password: Omit<Password, 'id'>): Promise<Password> {
+  async createPassword(password: Omit<Password, 'id' | 'website' | 'favicon'>): Promise<Password> {
     const encryptedPassword = {
       ...password,
       password: this.encrypt(password.password),
