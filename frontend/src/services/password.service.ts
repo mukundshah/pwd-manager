@@ -10,7 +10,7 @@ export class PasswordService extends APIService {
   constructor() {
     super({ auth: true })
     // You should store this key securely, perhaps in an environment variable
-    this.encryptionKey = import.meta.env.REACT_APP_ENCRYPTION_KEY || 'default-key'
+    this.encryptionKey = import.meta.env.VITE_ENCRYPTION_KEY || 'default-key'
   }
 
   private encrypt(text: string): string {

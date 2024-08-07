@@ -11,6 +11,7 @@ from pwdmgr.serializers import (
 
 class UserRegistrationViewSet(viewsets.ViewSet):
     serializer_class = UserRegistrationSerializer
+    permission_classes = [permissions.AllowAny]
 
     def create(self, request):
         serializer = self.serializer_class(data=request.data)
@@ -22,13 +23,11 @@ class UserRegistrationViewSet(viewsets.ViewSet):
 class CategoryViewSet(viewsets.ModelViewSet):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
-    permission_classes = [permissions.IsAuthenticated]
 
 
 class PasswordViewSet(viewsets.ModelViewSet):
     queryset = Password.objects.all()
     serializer_class = PasswordSerializer
-    permission_classes = [permissions.IsAuthenticated]
 
     def get_queryset(self):
         return self.queryset.filter(user=self.request.user)

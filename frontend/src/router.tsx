@@ -12,8 +12,8 @@ import Home from '@/pages'
 import SignIn from '@/pages/sign-in'
 import SignUp from '@/pages/sign-up'
 import Dashboard from '@/pages/dashboard'
-import PasswordAnalyzer from '@/pages/dashboard/feature/password-analyzer'
-import PasswordGenerator from '@/pages/dashboard/feature/password-generator'
+import PasswordAnalyzer from '@/pages/dashboard/password-analyzer'
+import PasswordGenerator from '@/pages/dashboard/password-generator'
 
 export const router = createBrowserRouter([
   {
@@ -33,16 +33,14 @@ export const router = createBrowserRouter([
             {
               path: 'dashboard',
               element: <Dashboard />,
-              children: [
-                {
-                  path: 'password-analyzer',
-                  element: <PasswordAnalyzer />,
-                },
-                {
-                  path: 'password-generator',
-                  element: <PasswordGenerator />,
-                },
-              ],
+            },
+            {
+              path: 'password-analyzer',
+              element: <PasswordAnalyzer />,
+            },
+            {
+              path: 'password-generator',
+              element: <PasswordGenerator />,
             },
           ],
         }],

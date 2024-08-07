@@ -1,6 +1,9 @@
-"use client";
+'use client'
 
-import React, { useReducer, useState } from "react";
+import React, { useReducer, useState } from 'react'
+import { LucidePlus } from 'lucide-react'
+import { Button } from './ui/button'
+import AddNewPasswoForm from './forms/add-new-password-form'
 import {
   Dialog,
   DialogContent,
@@ -8,18 +11,14 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog";
-import { Button } from "./ui/button";
-import { LucidePlus } from "lucide-react";
-import AddNewPasswoForm from "./forms/add-new-password-form";
-import { Category } from "@prisma/client";
+} from '@/components/ui/dialog'
 
 interface AddNewPasswordDialogProps {
-  categories: Category[];
+  categories: Category[]
 }
 
 const AddNewPasswordDialog = ({ categories }: AddNewPasswordDialogProps) => {
-  const [isOpen, toggleIsOpen] = useReducer((state) => !state, false);
+  const [isOpen, toggleIsOpen] = useReducer(state => !state, false)
 
   return (
     <Dialog onOpenChange={toggleIsOpen} open={isOpen}>
@@ -44,7 +43,7 @@ const AddNewPasswordDialog = ({ categories }: AddNewPasswordDialogProps) => {
         </div>
       </DialogContent>
     </Dialog>
-  );
-};
+  )
+}
 
-export default AddNewPasswordDialog;
+export default AddNewPasswordDialog

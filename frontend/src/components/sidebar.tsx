@@ -13,7 +13,7 @@ const Sidebar = ({ currentUser }: SidebarProps) => {
     <ScrollArea>
       <aside className="flex max-h-screen px-4 py-3">
         <div className="w-full space-y-5">
-          <Account currentUser={currentUser} />
+          <Account currentUser={currentUser as any} />
           <div className="space-y-2.5">
             <h1 className="font-bold">Passwords</h1>
             <DashboardsMenu variant="DESKTOP" />

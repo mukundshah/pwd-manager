@@ -21,6 +21,8 @@ const PasswordContent: React.FC<PasswordContentProps> = ({ password }) => {
         ? (
             <p>
               Username:
+              {' '}
+              {' '}
               {password.username}
             </p>
           )

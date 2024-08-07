@@ -22,13 +22,13 @@ const DashboardLayout = () => {
       <DashboardNavigation />
 
       <ResizablePanelGroup direction="horizontal" className="min-h-screen">
-        <ResizablePanel defaultSize={19} className="hidden md:block">
+        <ResizablePanel defaultSize={30} className="hidden md:block">
           <Sidebar currentUser={currentUser} />
         </ResizablePanel>
 
         <ResizableHandle withHandle className="hidden md:flex" />
 
-        <ResizablePanel defaultSize={81}>
+        <ResizablePanel defaultSize={70}>
           <div className="max-h-screen overflow-y-auto">
             <Container className="max-w-screen-lg px-5 py-3">
               <Outlet />

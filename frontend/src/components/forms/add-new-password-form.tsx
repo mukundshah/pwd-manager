@@ -101,7 +101,7 @@ const AddNewPasswoForm: React.FC<AddNewPasswoFormProps> = ({
                     <SelectItem
                       disabled={isPending}
                       key={category.id}
-                      value={category.id}
+                      value={category.id.toString()}
                       className="capitalize"
                     >
                       {/* <CategoryIcon

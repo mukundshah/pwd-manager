@@ -8,7 +8,7 @@ export abstract class APIService {
   public readonly api: $Fetch
 
   constructor({ baseURL, auth }: { baseURL?: string, auth?: boolean } = {}) {
-    this.baseURL = baseURL || import.meta.env.REACT_APP_API_BASE_URL || '/'
+    this.baseURL = baseURL || import.meta.env.VITE_API_BASE_URL || '/'
 
     this.api = ofetch.create({
       baseURL: this.baseURL,
@@ -17,7 +17,7 @@ export abstract class APIService {
         context.options.headers = (context.options.headers || {}) as Record<string, string>
 
         if (auth) {
-          context.options.headers.Authorization = `Bearer ${token}`
+          context.options.headers.Authorization = `Token ${token}`
         }
       },
 

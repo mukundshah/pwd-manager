@@ -3,23 +3,24 @@ import { APIService } from './api.service'
 
 export class AuthService extends APIService {
   async login(body: { email: string, password: string }): Promise<any> {
-    return this.api('/web/admin_sessions', {
+    const response = await this.api('/auth/login/', {
       method: 'POST',
       body,
-      onResponse: async ({ response }) => {
-        if (response.ok && response._data?.token) {
-          Cookies.set('token', response._data?.token)
-        }
-      },
     })
+
+    if (response && response.key) {
+      Cookies.set('token', response.key)
+    }
+
+    return response
   }
 
   static get loggedIn(): boolean {
     return !!Cookies.get('token')
   }
 
-  async register(body: { email: string, password: string }): Promise<any> {
-    return this.api('/web/admin_users', {
+  async register(body: { email: string, password: string, username: string }): Promise<any> {
+    return this.api('/auth/register/', {
       method: 'POST',
       body,
     })
@@ -31,6 +32,10 @@ export class AuthService extends APIService {
   }
 
   async getCurrentUser() {
-    return this.api('current-user/')
+    return this.api('/auth/user/', {
+      headers: {
+        Authorization: `Token ${Cookies.get('token')}`,
+      },
+    })
   }
 }

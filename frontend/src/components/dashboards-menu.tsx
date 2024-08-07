@@ -2,6 +2,7 @@ import React from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { LucideLockKeyhole, ScanLine, Sparkles } from 'lucide-react'
 import { Button, buttonVariants } from './ui/button'
+import { cn } from '@/lib/utils'
 
 interface DashboardsMenuProps {
   variant: 'DESKTOP' | 'MOBILE'
@@ -23,16 +24,16 @@ const DashboardsMenu: React.FC<DashboardsMenuProps> = ({ variant, toggleIsOpen }
     },
     {
       label: 'password generator',
-      href: '/dashboard/feature/password-generator',
+      href: '/password-generator',
       icon: Sparkles,
-      isActive: pathname === '/dashboard/feature/password-generator',
+      isActive: pathname === '/password-generator',
       isAvailable: false,
     },
     {
       label: 'password analyzer',
-      href: '/dashboard/feature/password-analyzer',
+      href: '/password-analyzer',
       icon: ScanLine,
-      isActive: pathname === '/dashboard/feature/password-analyzer',
+      isActive: pathname === '/password-analyzer',
       isAvailable: false,
     },
   ]
@@ -45,10 +46,12 @@ const DashboardsMenu: React.FC<DashboardsMenuProps> = ({ variant, toggleIsOpen }
               <Link
                 key={`${index}-${label}`}
                 to={href}
-                className={buttonVariants({
-                  variant: isActive ? 'default' : 'ghost',
-                  className: 'w-full justify-start overflow-hidden capitalize',
-                })}
+                className={cn(
+                  buttonVariants({
+                    variant: isActive ? 'default' : 'ghost',
+                    className: 'w-full justify-start overflow-hidden capitalize',
+                  }),
+                )}
               >
                 <Icon className="mr-2 h-4 w-4 flex-none" />
                 {label}
@@ -57,7 +60,7 @@ const DashboardsMenu: React.FC<DashboardsMenuProps> = ({ variant, toggleIsOpen }
           : (
               <Button
                 key={`${index}-${label}`}
-                className="w-full justify-start overflow-hidden capitalize"
+                className="w-full justify-start overflow-hidden text-left capitalize"
                 variant={!isActive ? 'ghost' : 'default'}
                 onClick={() => {
                   navigate(href)

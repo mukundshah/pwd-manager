@@ -39,7 +39,10 @@ const SignUpForm: React.FC = () => {
   })
 
   const { mutateAsync, isPending } = useMutation({
-    mutationFn: (values: TRegister) => authService.register(values),
+    mutationFn: (values: TRegister) => {
+      const { acceptTerms, ...rest } = values
+      return authService.register(rest)
+    },
     onSuccess: (_data) => {
       toast.success(`Now you can login`)
       form.reset()
