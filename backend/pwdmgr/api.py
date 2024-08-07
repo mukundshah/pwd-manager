@@ -1,7 +1,22 @@
 from rest_framework import permissions, viewsets
+from rest_framework.response import Response
 
 from pwdmgr.models import Category, Password
-from pwdmgr.serializers import CategorySerializer, PasswordSerializer
+from pwdmgr.serializers import (
+    CategorySerializer,
+    PasswordSerializer,
+    UserRegistrationSerializer,
+)
+
+
+class UserRegistrationViewSet(viewsets.ViewSet):
+    serializer_class = UserRegistrationSerializer
+
+    def create(self, request):
+        serializer = self.serializer_class(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        user = serializer.create(request)
+        return Response({"email": user.email, "username": user.username})
 
 
 class CategoryViewSet(viewsets.ModelViewSet):
