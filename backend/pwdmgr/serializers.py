@@ -1,3 +1,5 @@
+from cryptography.fernet import Fernet
+from django.conf import settings
 from django.contrib.auth.models import User
 from rest_framework import serializers
 
@@ -47,19 +49,21 @@ class PasswordSerializer(serializers.ModelSerializer):
             "category",
         )
 
-    # def to_representation(self, instance):
-    #     representation = super().to_representation(instance)
-    #     fernet = Fernet(settings.ENCRYPTION_KEY)
-    #     decrypted_password = fernet.decrypt(
-    #         representation["password"].encode()
-    #     ).decode()
-    #     representation["password"] = decrypted_password
-    #     return representation
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        fernet = Fernet(settings.ENCRYPTION_KEY.encode())
+        print(representation)
+        decrypted_password = fernet.decrypt(
+            representation["password"].encode()
+        ).decode()
+        representation["password"] = decrypted_password
+        return representation
 
-    # def validate_password(self, value):
-    #     fernet = Fernet(settings.ENCRYPTION_KEY)
-    #     encrypted_password = fernet.encrypt(value.encode()).decode()
-    #     return encrypted_password
+    def validate_password(self, value):
+        print(value)
+        fernet = Fernet(settings.ENCRYPTION_KEY.encode())
+        encrypted_password = fernet.encrypt(value.encode()).decode()
+        return encrypted_password
 
     # def create(self, validated_data):
     #     encrypted_password = validated_data.get("password")
